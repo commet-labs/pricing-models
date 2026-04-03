@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "pricing-models",
+  "metadata": {
+    "description": "SaaS pricing models skill for Claude Code"
+  },
+  "owner": {
+    "name": "Commet",
+    "email": "decker@commet.co"
+  },
+  "plugins": [
+    {
+      "name": "pricing-models",
+      "source": "./",
+      "category": "developer-tools"
+    }
+  ]
+}

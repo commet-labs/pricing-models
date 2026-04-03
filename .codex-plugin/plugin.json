@@ -1,0 +1,15 @@
+{
+  "name": "pricing-models",
+  "displayName": "Pricing Models",
+  "description": "SaaS pricing model skill — metered (pay per use), credits (block when exhausted), balance (prepaid spend), seats (per-user), and boolean (feature flags). Decision frameworks, implementation patterns, and when to use each model.",
+  "version": "1.0.0",
+  "skills": "./skills/",
+  "author": {
+    "name": "Commet",
+    "url": "https://commet.co"
+  },
+  "homepage": "https://commet.co",
+  "repository": "https://github.com/commet-labs/pricing-models",
+  "license": "Apache-2.0",
+  "keywords": ["pricing", "billing", "saas", "usage-based", "metered", "credits", "seats", "subscription", "monetization"]
+}
