@@ -1,7 +1,7 @@
 ---
 name: pricing-models
 description: Use when choosing a pricing model for a SaaS product — metered (pay per use), credits (block when exhausted), balance (prepaid spend), seats (per-user), or boolean (feature flags). Covers decision frameworks, implementation patterns, and when to use each model.
-license: Apache-2.0
+license: MIT
 metadata:
   author: commet
   version: "1.0.0"

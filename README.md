@@ -36,4 +36,4 @@ Plus a decision framework to help you choose, with real-world examples and code 
 
 ## License
 
-Apache-2.0
+MIT
