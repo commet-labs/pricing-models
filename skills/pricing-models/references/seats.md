@@ -83,7 +83,7 @@ const commet = new Commet({ apiKey: process.env.COMMET_API_KEY! });
 
 // Add 3 editor seats
 await commet.seats.add({
-  externalId: "org_456",
+  customerId: "org_456",
   seatType: "editor",
   count: 3,
 });
@@ -93,7 +93,7 @@ await commet.seats.add({
 
 ```typescript
 await commet.seats.remove({
-  externalId: "org_456",
+  customerId: "org_456",
   seatType: "editor",
   count: 2,
 });
@@ -104,7 +104,7 @@ await commet.seats.remove({
 ```typescript
 // Set editors to exactly 10, regardless of current count
 await commet.seats.set({
-  externalId: "org_456",
+  customerId: "org_456",
   seatType: "editor",
   count: 10,
 });
@@ -114,7 +114,7 @@ await commet.seats.set({
 
 ```typescript
 await commet.seats.setAll({
-  externalId: "org_456",
+  customerId: "org_456",
   seats: { admin: 2, editor: 10, viewer: 50 },
 });
 ```
@@ -123,7 +123,7 @@ await commet.seats.setAll({
 
 ```typescript
 const { data } = await commet.seats.getBalance({
-  externalId: "org_456",
+  customerId: "org_456",
   seatType: "editor",
 });
 // data.current = 10
@@ -131,7 +131,7 @@ const { data } = await commet.seats.getBalance({
 
 // Get all seat type balances
 const { data: all } = await commet.seats.getAllBalances({
-  externalId: "org_456",
+  customerId: "org_456",
 });
 // { admin: { current: 2, asOf: "..." }, editor: { current: 10, asOf: "..." } }
 ```
@@ -152,7 +152,7 @@ const { data } = await customer.seats.getBalance("editor");
 ```typescript
 const { data } = await commet.features.canUse({
   code: "team_members",
-  externalId: "org_456",
+  customerId: "org_456",
 });
 
 if (!data.allowed) {
@@ -219,7 +219,7 @@ When a team member is added or removed from your application, update the seat co
 ```typescript
 async function onTeamMemberAdded(organizationId: string) {
   await commet.seats.add({
-    externalId: organizationId,
+    customerId: organizationId,
     seatType: "editor",
     count: 1,
   });
@@ -227,7 +227,7 @@ async function onTeamMemberAdded(organizationId: string) {
 
 async function onTeamMemberRemoved(organizationId: string) {
   await commet.seats.remove({
-    externalId: organizationId,
+    customerId: organizationId,
     seatType: "editor",
     count: 1,
   });
@@ -240,7 +240,7 @@ async function onTeamMemberRemoved(organizationId: string) {
 async function canInviteMember(organizationId: string): Promise<boolean> {
   const { data } = await commet.features.canUse({
     code: "team_members",
-    externalId: organizationId,
+    customerId: organizationId,
   });
   return data.allowed;
 }

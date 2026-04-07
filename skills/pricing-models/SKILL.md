@@ -49,7 +49,7 @@ import { Commet } from "@commet/node";
 const commet = new Commet({ apiKey: process.env.COMMET_API_KEY! });
 
 await commet.usage.track({
-  externalId: "user_123",
+  customerId: "user_123",
   feature: "api_calls",
   value: 1,
   idempotencyKey: "req_abc123",
@@ -61,17 +61,17 @@ await commet.usage.track({
 ```typescript
 const { data } = await commet.features.canUse({
   code: "image_generations",
-  externalId: "user_123",
+  customerId: "user_123",
 });
 
 if (!data.allowed) {
   // Customer exhausted credits -- prompt to buy a credit pack
-  const { data: portalData } = await commet.portal.getUrl({ externalId: "user_123" });
+  const { data: portalData } = await commet.portal.getUrl({ customerId: "user_123" });
   return redirect(portalData.portalUrl);
 }
 
 await commet.usage.track({
-  externalId: "user_123",
+  customerId: "user_123",
   feature: "image_generations",
   value: 1,
 });
@@ -99,13 +99,13 @@ const result = await generateText({
 
 ```typescript
 await commet.seats.add({
-  externalId: "org_456",
+  customerId: "org_456",
   seatType: "editor",
   count: 3,
 });
 
 const { data } = await commet.seats.getBalance({
-  externalId: "org_456",
+  customerId: "org_456",
   seatType: "editor",
 });
 // data.current = 3
@@ -116,7 +116,7 @@ const { data } = await commet.seats.getBalance({
 ```typescript
 const { data } = await commet.features.check({
   code: "custom_branding",
-  externalId: "user_123",
+  customerId: "user_123",
 });
 
 if (!data.allowed) {

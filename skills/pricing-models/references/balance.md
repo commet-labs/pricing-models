@@ -110,7 +110,7 @@ For cases where you are not using `@commet/ai-sdk`:
 
 ```typescript
 await commet.usage.track({
-  externalId: "user_123",
+  customerId: "user_123",
   feature: "ai_generation",
   model: "anthropic/claude-3-opus",
   inputTokens: 1000,
@@ -128,7 +128,7 @@ For non-AI features on a balance model, track with a value:
 
 ```typescript
 await commet.usage.track({
-  externalId: "user_123",
+  customerId: "user_123",
   feature: "data_processing",
   value: 500,  // 500 units processed
 });
@@ -140,7 +140,7 @@ await commet.usage.track({
 ```typescript
 const { data } = await commet.features.get({
   code: "ai_generation",
-  externalId: "user_123",
+  customerId: "user_123",
 });
 
 // data.current   = consumed amount
@@ -152,7 +152,7 @@ const { data } = await commet.features.get({
 ```typescript
 const { data } = await commet.features.canUse({
   code: "ai_generation",
-  externalId: "user_123",
+  customerId: "user_123",
 });
 
 if (!data.allowed) {

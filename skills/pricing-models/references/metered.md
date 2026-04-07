@@ -65,7 +65,7 @@ const commet = new Commet({ apiKey: process.env.COMMET_API_KEY! });
 
 // Track a single API call
 await commet.usage.track({
-  externalId: "user_123",
+  customerId: "user_123",
   feature: "api_calls",
   value: 1,
   idempotencyKey: `req_${requestId}`,
@@ -79,9 +79,9 @@ For high-volume usage, batch events to reduce API calls:
 ```typescript
 await commet.usage.trackBatch({
   events: [
-    { externalId: "user_123", feature: "api_calls", value: 1 },
-    { externalId: "user_456", feature: "api_calls", value: 1 },
-    { externalId: "user_789", feature: "api_calls", value: 3 },
+    { customerId: "user_123", feature: "api_calls", value: 1 },
+    { customerId: "user_456", feature: "api_calls", value: 1 },
+    { customerId: "user_789", feature: "api_calls", value: 3 },
   ],
 });
 ```
@@ -91,7 +91,7 @@ await commet.usage.trackBatch({
 ```typescript
 const { data } = await commet.features.get({
   code: "api_calls",
-  externalId: "user_123",
+  customerId: "user_123",
 });
 
 // data.current   = 8,500  (used this period)
@@ -116,7 +116,7 @@ Always pass an `idempotencyKey` to prevent duplicate billing on retries. Use the
 ```typescript
 // If this request is retried, the second call is a no-op
 await commet.usage.track({
-  externalId: "user_123",
+  customerId: "user_123",
   feature: "api_calls",
   value: 1,
   idempotencyKey: `req_${request.id}`,

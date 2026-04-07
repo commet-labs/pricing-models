@@ -81,14 +81,14 @@ const commet = new Commet({ apiKey: process.env.COMMET_API_KEY! });
 
 const { data } = await commet.features.canUse({
   code: "image_generations",
-  externalId: "user_123",
+  customerId: "user_123",
 });
 
 if (!data.allowed) {
   // Customer has no credits left
   // Show a "buy more credits" prompt or redirect to portal
   const { data: portalData } = await commet.portal.getUrl({
-    externalId: "user_123",
+    customerId: "user_123",
   });
   return { error: "insufficient_credits", portalUrl: portalData.portalUrl };
 }
@@ -97,7 +97,7 @@ if (!data.allowed) {
 const image = await generateImage(prompt);
 
 await commet.usage.track({
-  externalId: "user_123",
+  customerId: "user_123",
   feature: "image_generations",
   value: 1,
 });
@@ -108,7 +108,7 @@ await commet.usage.track({
 ```typescript
 const { data } = await commet.features.get({
   code: "image_generations",
-  externalId: "user_123",
+  customerId: "user_123",
 });
 
 // data.current   = 80  (credits consumed this period)
