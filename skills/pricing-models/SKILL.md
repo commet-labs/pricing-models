@@ -8,12 +8,12 @@ metadata:
   homepage: https://commet.co
   source: https://github.com/commet-labs/pricing-models
 references:
-  - metered.md
-  - credits.md
-  - balance.md
-  - seats.md
-  - hybrid-models.md
-  - choosing-a-model.md
+  - references/metered.md
+  - references/credits.md
+  - references/balance.md
+  - references/seats.md
+  - references/hybrid-models.md
+  - references/choosing-a-model.md
 ---
 
 # Pricing Models
