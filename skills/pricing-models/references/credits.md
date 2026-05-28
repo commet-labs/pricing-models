@@ -116,17 +116,6 @@ const { data } = await commet.features.get({
 // data.remaining = 20  (credits left)
 ```
 
-### Scoped API
-
-```typescript
-const customer = commet.customer("user_123");
-
-const { data } = await customer.features.canUse("image_generations");
-if (data.allowed) {
-  await customer.usage.track("image_generations", 1);
-}
-```
-
 ### List available credit packs
 
 ```typescript
@@ -140,18 +129,18 @@ const { data: packs } = await commet.creditPacks.list();
 Plan: Free ($0/mo)
   Credits: 10/month
   Feature: image_generations
-    type: metered
+    type: usage
     creditsPerUnit: 2
     includedAmount: 5  (10 credits / 2 per unit)
 
 Plan: Creator ($19/mo)
   Credits: 100/month
   Feature: image_generations
-    type: metered
+    type: usage
     creditsPerUnit: 2
     includedAmount: 50  (100 credits / 2 per unit)
   Feature: video_exports
-    type: metered
+    type: usage
     creditsPerUnit: 10
     includedAmount: 10  (100 credits / 10 per unit)
 

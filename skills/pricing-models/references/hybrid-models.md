@@ -55,7 +55,7 @@ Plan: Team ($12/seat/mo)
 
 ```typescript
 // Manage seats when team changes
-await commet.seats.add({ customerId: "org_456", seatType: "editor", count: 1 });
+await commet.seats.add({ customerId: "org_456", featureCode: "editor", count: 1 });
 
 // Track metered features independently
 await commet.usage.track({ customerId: "org_456", feature: "file_storage_gb", value: 1 });
@@ -90,7 +90,7 @@ Plan: Enterprise ($299/mo)
 
 ```typescript
 // Check boolean feature access
-const { data } = await commet.features.check({
+const { data } = await commet.features.get({
   code: "sso",
   customerId: "user_123",
 });
@@ -137,7 +137,7 @@ import { tracked } from "@commet/ai-sdk";
 import { anthropic } from "@ai-sdk/anthropic";
 
 // Check if customer can use advanced models
-const { data: modelAccess } = await commet.features.check({
+const { data: modelAccess } = await commet.features.get({
   code: "advanced_models",
   customerId: "user_123",
 });

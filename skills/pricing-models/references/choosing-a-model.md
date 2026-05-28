@@ -45,7 +45,7 @@ The value metric is what your customer perceives as the unit of value. This is t
 | **Customer cost clarity** | Low | High | Medium | High | High |
 | **Implementation complexity** | Low | Medium | Medium | Low | Trivial |
 | **Sub-cent pricing** | Yes | No | Yes | No | N/A |
-| **Multi-feature** | Per feature | Per feature | Shared pool | Per seat type | Per flag |
+| **Multi-feature** | Per feature | Per feature | Shared pool | Per feature (type="seats") | Per flag |
 | **Overage handling** | Auto-charged | Buy more packs | Top-up or overage | Prorated add | N/A |
 
 ## Real-World Examples
@@ -100,7 +100,7 @@ Slack, Notion, Linear, Figma. Each user costs a fixed amount per month. The more
 
 **Why seats work:** Value scales linearly with team size. A 50-person company gets 10x the value of a 5-person team. Per-seat pricing captures this directly.
 
-**Pattern:** Included seats in plan base + per-seat overage. Different seat types for different roles.
+**Pattern:** Included seats in plan base + per-seat overage. Different seat features for different roles.
 
 ```
 Plan: Team ($99/mo)

@@ -45,18 +45,18 @@ Seats use a hybrid billing model:
 
 This ensures the customer always pays proportionally, and you never wait until period end to collect seat revenue.
 
-### Seat Types
+### Seat Features
 
-Define different license tiers with different prices:
+Define different license tiers as features with `type="seats"`, each with different prices:
 
 ```
-Seat Types:
+Seat Features:
   - admin:  $50/month
   - editor: $25/month
   - viewer: $0/month (free)
 ```
 
-Each seat type is tracked independently. A customer might have 2 admins, 10 editors, and unlimited viewers.
+Each seat feature is tracked independently via its `featureCode`. A customer might have 2 admins, 10 editors, and unlimited viewers.
 
 ### Proration
 
@@ -84,7 +84,7 @@ const commet = new Commet({ apiKey: process.env.COMMET_API_KEY! });
 // Add 3 editor seats
 await commet.seats.add({
   customerId: "org_456",
-  seatType: "editor",
+  featureCode: "editor",
   count: 3,
 });
 ```
@@ -94,7 +94,7 @@ await commet.seats.add({
 ```typescript
 await commet.seats.remove({
   customerId: "org_456",
-  seatType: "editor",
+  featureCode: "editor",
   count: 2,
 });
 ```
@@ -105,12 +105,12 @@ await commet.seats.remove({
 // Set editors to exactly 10, regardless of current count
 await commet.seats.set({
   customerId: "org_456",
-  seatType: "editor",
+  featureCode: "editor",
   count: 10,
 });
 ```
 
-### Set all seat types at once
+### Set all seat features at once
 
 ```typescript
 await commet.seats.setAll({
@@ -124,27 +124,16 @@ await commet.seats.setAll({
 ```typescript
 const { data } = await commet.seats.getBalance({
   customerId: "org_456",
-  seatType: "editor",
+  featureCode: "editor",
 });
 // data.current = 10
 // data.asOf = "2026-03-15T10:00:00Z"
 
-// Get all seat type balances
+// Get all seat feature balances
 const { data: all } = await commet.seats.getAllBalances({
   customerId: "org_456",
 });
 // { admin: { current: 2, asOf: "..." }, editor: { current: 10, asOf: "..." } }
-```
-
-### Scoped API
-
-```typescript
-const customer = commet.customer("org_456");
-
-await customer.seats.add("editor", 3);
-await customer.seats.remove("editor", 1);
-await customer.seats.set("editor", 10);
-const { data } = await customer.seats.getBalance("editor");
 ```
 
 ### Check if more seats are allowed
@@ -173,7 +162,7 @@ Plan: Starter ($49/mo)
     includedAmount: 3
     overageEnabled: true
     overageUnitPrice: 150000  (rate scale: $15/seat)
-  Seat Types:
+  Seat Features:
     - editor: $15/mo
 
 Plan: Team ($99/mo)
@@ -182,7 +171,7 @@ Plan: Team ($99/mo)
     includedAmount: 10
     overageEnabled: true
     overageUnitPrice: 250000  (rate scale: $25/seat)
-  Seat Types:
+  Seat Features:
     - admin: $50/mo
     - editor: $25/mo
     - viewer: $0/mo
@@ -192,7 +181,7 @@ Plan: Enterprise ($499/mo)
     type: seats
     unlimited: true
     overageUnitPrice: 200000  (rate scale: $20/seat)
-  Seat Types:
+  Seat Features:
     - admin: $40/mo
     - editor: $20/mo
     - viewer: $0/mo
@@ -220,7 +209,7 @@ When a team member is added or removed from your application, update the seat co
 async function onTeamMemberAdded(organizationId: string) {
   await commet.seats.add({
     customerId: organizationId,
-    seatType: "editor",
+    featureCode: "editor",
     count: 1,
   });
 }
@@ -228,7 +217,7 @@ async function onTeamMemberAdded(organizationId: string) {
 async function onTeamMemberRemoved(organizationId: string) {
   await commet.seats.remove({
     customerId: organizationId,
-    seatType: "editor",
+    featureCode: "editor",
     count: 1,
   });
 }

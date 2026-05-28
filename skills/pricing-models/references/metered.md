@@ -72,20 +72,6 @@ await commet.usage.track({
 });
 ```
 
-### Track in batches
-
-For high-volume usage, batch events to reduce API calls:
-
-```typescript
-await commet.usage.trackBatch({
-  events: [
-    { customerId: "user_123", feature: "api_calls", value: 1 },
-    { customerId: "user_456", feature: "api_calls", value: 1 },
-    { customerId: "user_789", feature: "api_calls", value: 3 },
-  ],
-});
-```
-
 ### Check current usage
 
 ```typescript
@@ -98,15 +84,6 @@ const { data } = await commet.features.get({
 // data.included  = 10,000 (free units)
 // data.remaining = 1,500  (before overage kicks in)
 // data.overage   = 0      (overage units so far)
-```
-
-### Scoped API for cleaner code
-
-```typescript
-const customer = commet.customer("user_123");
-
-await customer.usage.track("api_calls", 1);
-const { data } = await customer.features.get("api_calls");
 ```
 
 ## Idempotency
@@ -128,21 +105,21 @@ await commet.usage.track({
 ```
 Plan: Starter ($29/mo)
   Feature: api_calls
-    type: metered
+    type: usage
     includedAmount: 10,000
     overageEnabled: true
     overageUnitPrice: 20  (rate scale: $0.002/call)
 
 Plan: Pro ($99/mo)
   Feature: api_calls
-    type: metered
+    type: usage
     includedAmount: 100,000
     overageEnabled: true
     overageUnitPrice: 10  (rate scale: $0.001/call)
 
 Plan: Enterprise ($499/mo)
   Feature: api_calls
-    type: metered
+    type: usage
     unlimited: true
     overageUnitPrice: 5  (rate scale: $0.0005/call)
 ```

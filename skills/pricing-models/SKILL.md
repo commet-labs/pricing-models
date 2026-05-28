@@ -100,13 +100,13 @@ const result = await generateText({
 ```typescript
 await commet.seats.add({
   customerId: "org_456",
-  seatType: "editor",
+  featureCode: "editor",
   count: 3,
 });
 
 const { data } = await commet.seats.getBalance({
   customerId: "org_456",
-  seatType: "editor",
+  featureCode: "editor",
 });
 // data.current = 3
 ```
@@ -114,7 +114,7 @@ const { data } = await commet.seats.getBalance({
 ### Boolean -- Check feature access
 
 ```typescript
-const { data } = await commet.features.check({
+const { data } = await commet.features.get({
   code: "custom_branding",
   customerId: "user_123",
 });
@@ -132,5 +132,5 @@ if (!data.allowed) {
 | **Metered pricing** | [metered.md](references/metered.md) -- Pay-per-use, overage, included amounts |
 | **Credit-based pricing** | [credits.md](references/credits.md) -- Block purchases, hard limits, credit packs |
 | **Balance / prepaid** | [balance.md](references/balance.md) -- Prepaid spend, AI billing, top-ups |
-| **Seat-based pricing** | [seats.md](references/seats.md) -- Per-user, advance + true-up, seat types |
+| **Seat-based pricing** | [seats.md](references/seats.md) -- Per-user, advance + true-up, seat features |
 | **Combining models** | [hybrid-models.md](references/hybrid-models.md) -- Base + usage, seats + metered, addons |

@@ -182,7 +182,7 @@ Plan: Starter ($29/mo)
   Balance: $5.00/month (includedBalance: 50000)
   blockOnExhaustion: true
   Feature: ai_generation
-    type: metered
+    type: usage
     pricingMode: ai_model
     margin: 2000  (20% markup on AI costs)
 
@@ -190,7 +190,7 @@ Plan: Pro ($49/mo)
   Balance: $25.00/month (includedBalance: 250000)
   blockOnExhaustion: false
   Feature: ai_generation
-    type: metered
+    type: usage
     pricingMode: ai_model
     margin: 1500  (15% markup)
 
@@ -198,7 +198,7 @@ Plan: Enterprise ($199/mo)
   Balance: $100.00/month (includedBalance: 1000000)
   blockOnExhaustion: false
   Feature: ai_generation
-    type: metered
+    type: usage
     pricingMode: ai_model
     margin: 0  (pass-through cost)
 ```
