@@ -139,7 +139,7 @@ const { data: all } = await commet.seats.getAllBalances({
 ### Check if more seats are allowed
 
 ```typescript
-const { data } = await commet.features.canUse({
+const { data } = await commet.featureAccess.canUse({
   code: "team_members",
   customerId: "org_456",
 });
@@ -227,7 +227,7 @@ async function onTeamMemberRemoved(organizationId: string) {
 
 ```typescript
 async function canInviteMember(organizationId: string): Promise<boolean> {
-  const { data } = await commet.features.canUse({
+  const { data } = await commet.featureAccess.canUse({
     code: "team_members",
     customerId: organizationId,
   });

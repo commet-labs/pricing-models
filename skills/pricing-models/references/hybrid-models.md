@@ -90,7 +90,7 @@ Plan: Enterprise ($299/mo)
 
 ```typescript
 // Check boolean feature access
-const { data } = await commet.features.get({
+const { data } = await commet.featureAccess.get({
   code: "sso",
   customerId: "user_123",
 });
@@ -137,7 +137,7 @@ import { tracked } from "@commet/ai-sdk";
 import { anthropic } from "@ai-sdk/anthropic";
 
 // Check if customer can use advanced models
-const { data: modelAccess } = await commet.features.get({
+const { data: modelAccess } = await commet.featureAccess.get({
   code: "advanced_models",
   customerId: "user_123",
 });

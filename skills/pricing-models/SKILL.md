@@ -59,7 +59,7 @@ await commet.usage.track({
 ### Credits -- Check before consuming
 
 ```typescript
-const { data } = await commet.features.canUse({
+const { data } = await commet.featureAccess.canUse({
   code: "image_generations",
   customerId: "user_123",
 });
@@ -114,7 +114,7 @@ const { data } = await commet.seats.getBalance({
 ### Boolean -- Check feature access
 
 ```typescript
-const { data } = await commet.features.get({
+const { data } = await commet.featureAccess.get({
   code: "custom_branding",
   customerId: "user_123",
 });

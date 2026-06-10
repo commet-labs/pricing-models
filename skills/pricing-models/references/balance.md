@@ -138,7 +138,7 @@ await commet.usage.track({
 ### Check Balance
 
 ```typescript
-const { data } = await commet.features.get({
+const { data } = await commet.featureAccess.get({
   code: "ai_generation",
   customerId: "user_123",
 });
@@ -150,7 +150,7 @@ const { data } = await commet.features.get({
 ### Check Before Using (for blockOnExhaustion)
 
 ```typescript
-const { data } = await commet.features.canUse({
+const { data } = await commet.featureAccess.canUse({
   code: "ai_generation",
   customerId: "user_123",
 });

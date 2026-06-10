@@ -79,7 +79,7 @@ import { Commet } from "@commet/node";
 
 const commet = new Commet({ apiKey: process.env.COMMET_API_KEY! });
 
-const { data } = await commet.features.canUse({
+const { data } = await commet.featureAccess.canUse({
   code: "image_generations",
   customerId: "user_123",
 });
@@ -106,7 +106,7 @@ await commet.usage.track({
 ### Check remaining balance
 
 ```typescript
-const { data } = await commet.features.get({
+const { data } = await commet.featureAccess.get({
   code: "image_generations",
   customerId: "user_123",
 });

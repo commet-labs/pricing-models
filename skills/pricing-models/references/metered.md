@@ -75,7 +75,7 @@ await commet.usage.track({
 ### Check current usage
 
 ```typescript
-const { data } = await commet.features.get({
+const { data } = await commet.featureAccess.get({
   code: "api_calls",
   customerId: "user_123",
 });
