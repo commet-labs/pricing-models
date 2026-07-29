@@ -36,8 +36,8 @@ Plan: Growth ($79/mo)
 const commet = new Commet({ apiKey: process.env.COMMET_API_KEY! });
 
 // Track different metered features independently
-await commet.usage.track({ customerId: "user_123", feature: "api_calls", value: 1 });
-await commet.usage.track({ customerId: "user_123", feature: "storage_gb", value: 0.5 });
+await commet.usage.track({ customerId: "user_123", featureCode: "api_calls", value: 1 });
+await commet.usage.track({ customerId: "user_123", featureCode: "storage_gb", value: 0.5 });
 ```
 
 ### Seats + Metered Usage
@@ -58,8 +58,8 @@ Plan: Team ($12/seat/mo)
 await commet.seats.add({ customerId: "org_456", featureCode: "editor", count: 1 });
 
 // Track metered features independently
-await commet.usage.track({ customerId: "org_456", feature: "file_storage_gb", value: 1 });
-await commet.usage.track({ customerId: "org_456", feature: "api_calls", value: 1 });
+await commet.usage.track({ customerId: "org_456", featureCode: "file_storage_gb", value: 1 });
+await commet.usage.track({ customerId: "org_456", featureCode: "api_calls", value: 1 });
 ```
 
 ### Boolean Feature Gates + Metered
@@ -90,17 +90,17 @@ Plan: Enterprise ($299/mo)
 
 ```typescript
 // Check boolean feature access
-const { data } = await commet.featureAccess.get({
+const access = await commet.featureAccess.get({
   code: "sso",
   customerId: "user_123",
 });
 
-if (!data.allowed) {
+if (!access.allowed) {
   // Show upgrade prompt
 }
 
 // Track metered feature independently
-await commet.usage.track({ customerId: "user_123", feature: "api_calls", value: 1 });
+await commet.usage.track({ customerId: "user_123", featureCode: "api_calls", value: 1 });
 ```
 
 ### Balance (AI) + Boolean Gates
@@ -137,7 +137,7 @@ import { tracked } from "@commet/ai-sdk";
 import { anthropic } from "@ai-sdk/anthropic";
 
 // Check if customer can use advanced models
-const { data: modelAccess } = await commet.featureAccess.get({
+const modelAccess = await commet.featureAccess.get({
   code: "advanced_models",
   customerId: "user_123",
 });

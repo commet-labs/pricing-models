@@ -66,21 +66,21 @@ const commet = new Commet({ apiKey: process.env.COMMET_API_KEY! });
 // Track a single API call
 await commet.usage.track({
   customerId: "user_123",
-  feature: "api_calls",
+  featureCode: "api_calls",
   value: 1,
-  idempotencyKey: `req_${requestId}`,
-});
+  eventId: `usage_${requestId}`,
+}, { idempotencyKey: `req_${requestId}` });
 ```
 
 ### Check current usage
 
 ```typescript
-const { data } = await commet.featureAccess.get({
+const access = await commet.featureAccess.get({
   code: "api_calls",
   customerId: "user_123",
 });
 
-// data.current   = 8,500  (used this period)
+// access.consumption.unitsUsed = 8,500 for a metered feature
 // data.included  = 10,000 (free units)
 // data.remaining = 1,500  (before overage kicks in)
 // data.overage   = 0      (overage units so far)
@@ -94,10 +94,10 @@ Always pass an `idempotencyKey` to prevent duplicate billing on retries. Use the
 // If this request is retried, the second call is a no-op
 await commet.usage.track({
   customerId: "user_123",
-  feature: "api_calls",
+  featureCode: "api_calls",
   value: 1,
-  idempotencyKey: `req_${request.id}`,
-});
+  eventId: `usage_${request.id}`,
+}, { idempotencyKey: `req_${request.id}` });
 ```
 
 ## Plan Configuration Example

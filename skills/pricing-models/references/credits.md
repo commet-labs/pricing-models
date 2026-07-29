@@ -79,18 +79,18 @@ import { Commet } from "@commet/node";
 
 const commet = new Commet({ apiKey: process.env.COMMET_API_KEY! });
 
-const { data } = await commet.featureAccess.canUse({
-  code: "image_generations",
+const availability = await commet.usage.check({
+  featureCode: "image_generations",
   customerId: "user_123",
 });
 
-if (!data.allowed) {
+if (!availability.allowed) {
   // Customer has no credits left
   // Show a "buy more credits" prompt or redirect to portal
-  const { data: portalData } = await commet.portal.getUrl({
+  const portal = await commet.portal.getUrl({
     customerId: "user_123",
   });
-  return { error: "insufficient_credits", portalUrl: portalData.portalUrl };
+  return { error: "insufficient_credits", portalUrl: portal.portalUrl };
 }
 
 // Perform the action, then track
@@ -98,7 +98,7 @@ const image = await generateImage(prompt);
 
 await commet.usage.track({
   customerId: "user_123",
-  feature: "image_generations",
+  featureCode: "image_generations",
   value: 1,
 });
 ```
@@ -106,12 +106,12 @@ await commet.usage.track({
 ### Check remaining balance
 
 ```typescript
-const { data } = await commet.featureAccess.get({
+const access = await commet.featureAccess.get({
   code: "image_generations",
   customerId: "user_123",
 });
 
-// data.current   = 80  (credits consumed this period)
+// access.consumption exposes credits consumed and remaining
 // data.included  = 100 (plan credits per period)
 // data.remaining = 20  (credits left)
 ```

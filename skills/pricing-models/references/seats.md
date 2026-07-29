@@ -122,15 +122,15 @@ await commet.seats.setAll({
 ### Check current seats
 
 ```typescript
-const { data } = await commet.seats.getBalance({
+const balance = await commet.seats.getBalance({
   customerId: "org_456",
   featureCode: "editor",
 });
-// data.current = 10
-// data.asOf = "2026-03-15T10:00:00Z"
+// balance.current = 10
+// balance.asOf = "2026-03-15T10:00:00Z"
 
 // Get all seat feature balances
-const { data: all } = await commet.seats.getAllBalances({
+const all = await commet.seats.getAllBalances({
   customerId: "org_456",
 });
 // { admin: { current: 2, asOf: "..." }, editor: { current: 10, asOf: "..." } }
@@ -139,12 +139,12 @@ const { data: all } = await commet.seats.getAllBalances({
 ### Check if more seats are allowed
 
 ```typescript
-const { data } = await commet.featureAccess.canUse({
+const access = await commet.featureAccess.get({
   code: "team_members",
   customerId: "org_456",
 });
 
-if (!data.allowed) {
+if (!access.allowed) {
   // Plan does not allow more seats (e.g., at plan limit and overageEnabled is false)
 }
 
@@ -227,10 +227,10 @@ async function onTeamMemberRemoved(organizationId: string) {
 
 ```typescript
 async function canInviteMember(organizationId: string): Promise<boolean> {
-  const { data } = await commet.featureAccess.canUse({
+  const access = await commet.featureAccess.get({
     code: "team_members",
     customerId: organizationId,
   });
-  return data.allowed;
+  return access.allowed;
 }
 ```

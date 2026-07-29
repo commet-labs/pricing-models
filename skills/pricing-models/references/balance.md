@@ -111,7 +111,7 @@ For cases where you are not using `@commet/ai-sdk`:
 ```typescript
 await commet.usage.track({
   customerId: "user_123",
-  feature: "ai_generation",
+  featureCode: "ai_generation",
   model: "anthropic/claude-3-opus",
   inputTokens: 1000,
   outputTokens: 500,
@@ -129,7 +129,7 @@ For non-AI features on a balance model, track with a value:
 ```typescript
 await commet.usage.track({
   customerId: "user_123",
-  feature: "data_processing",
+  featureCode: "data_processing",
   value: 500,  // 500 units processed
 });
 // Cost = 500 x overageUnitPrice, deducted from balance
@@ -138,24 +138,24 @@ await commet.usage.track({
 ### Check Balance
 
 ```typescript
-const { data } = await commet.featureAccess.get({
+const access = await commet.featureAccess.get({
   code: "ai_generation",
   customerId: "user_123",
 });
 
-// data.current   = consumed amount
+// access.consumption exposes the current balance spend
 // data.remaining = balance remaining
 ```
 
 ### Check Before Using (for blockOnExhaustion)
 
 ```typescript
-const { data } = await commet.featureAccess.canUse({
-  code: "ai_generation",
+const availability = await commet.usage.check({
+  featureCode: "ai_generation",
   customerId: "user_123",
 });
 
-if (!data.allowed) {
+if (!availability.allowed) {
   // Balance exhausted and blocking is enabled
   return { error: "insufficient_balance" };
 }

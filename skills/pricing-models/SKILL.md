@@ -7,13 +7,6 @@ metadata:
   version: "1.0.0"
   homepage: https://commet.co
   source: https://github.com/commet-labs/pricing-models
-references:
-  - references/metered.md
-  - references/credits.md
-  - references/balance.md
-  - references/seats.md
-  - references/hybrid-models.md
-  - references/choosing-a-model.md
 ---
 
 # Pricing Models
@@ -50,29 +43,29 @@ const commet = new Commet({ apiKey: process.env.COMMET_API_KEY! });
 
 await commet.usage.track({
   customerId: "user_123",
-  feature: "api_calls",
+  featureCode: "api_calls",
   value: 1,
-  idempotencyKey: "req_abc123",
-});
+  eventId: "usage_abc123",
+}, { idempotencyKey: "req_abc123" });
 ```
 
 ### Credits -- Check before consuming
 
 ```typescript
-const { data } = await commet.featureAccess.canUse({
-  code: "image_generations",
+const availability = await commet.usage.check({
+  featureCode: "image_generations",
   customerId: "user_123",
 });
 
-if (!data.allowed) {
+if (!availability.allowed) {
   // Customer exhausted credits -- prompt to buy a credit pack
-  const { data: portalData } = await commet.portal.getUrl({ customerId: "user_123" });
-  return redirect(portalData.portalUrl);
+  const portal = await commet.portal.getUrl({ customerId: "user_123" });
+  return redirect(portal.portalUrl);
 }
 
 await commet.usage.track({
   customerId: "user_123",
-  feature: "image_generations",
+  featureCode: "image_generations",
   value: 1,
 });
 ```
@@ -104,22 +97,22 @@ await commet.seats.add({
   count: 3,
 });
 
-const { data } = await commet.seats.getBalance({
+const balance = await commet.seats.getBalance({
   customerId: "org_456",
   featureCode: "editor",
 });
-// data.current = 3
+// balance.current = 3
 ```
 
 ### Boolean -- Check feature access
 
 ```typescript
-const { data } = await commet.featureAccess.get({
+const access = await commet.featureAccess.get({
   code: "custom_branding",
   customerId: "user_123",
 });
 
-if (!data.allowed) {
+if (!access.allowed) {
   // Feature not included in their plan
 }
 ```
