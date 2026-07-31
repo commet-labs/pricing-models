@@ -32,7 +32,7 @@ Plus a decision framework to help you choose, with real-world examples and code 
 
 - [Commet](https://commet.co) -- Billing and payments for SaaS
 - [Commet SDK](https://github.com/commet-labs/commet) -- SDKs and libraries
-- [Commet Skills](https://github.com/commet-labs/commet-skills) -- Platform-specific agent skills
+- [Commet Skills](https://github.com/commet-labs/skills) -- Platform-specific agent skills
 
 ## License
 
