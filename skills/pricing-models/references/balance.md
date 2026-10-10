@@ -143,8 +143,11 @@ const access = await commet.featureAccess.get({
   customerId: "user_123",
 });
 
-// access.consumption exposes the current balance spend
-// data.remaining = balance remaining
+// For a usage feature on a balance plan, access.consumption carries:
+// unitsUsed      = units recorded this period
+// spent          = { amount, currency } deducted by this feature this period
+// availableUnits = units the remaining balance covers at a fixed price
+//                  (absent for AI model pricing)
 ```
 
 ### Check Before Using (for blockOnExhaustion)
@@ -211,8 +214,11 @@ Plan: Enterprise ($199/mo)
 | Upgrade | Reset to new plan's `includedBalance` |
 | Downgrade | At renewal, reset to new value |
 | Top-up | Added immediately to current balance |
-| Cancellation | Balance lost |
-| Reactivation | Reset to `includedBalance` |
+| Cancellation | No cancellation-specific change |
+| Reactivation | Not reset when already initialized |
+| Pause | No change |
+| Resume after period-end pause | Reset to `includedBalance` for the new period |
+| Resume after immediate pause | No change; the preserved period continues |
 | `includedBalance` increase (founder) | Immediate (benefits customer) |
 | `includedBalance` decrease (founder) | At renewal |
 | Overage unit price change (founder) | At renewal |

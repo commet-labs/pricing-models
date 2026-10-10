@@ -41,9 +41,9 @@ Seats use a hybrid billing model:
 | Component | When Charged | What It Covers |
 |-----------|-------------|----------------|
 | Advance | Period start | All current seats above included amount |
-| True-up | Mid-period (when seats added) | Prorated cost of new seats for remaining days |
+| True-up | Next invoice (for seats added mid-period) | Prorated cost of new seats for the days they were active |
 
-This ensures the customer always pays proportionally, and you never wait until period end to collect seat revenue.
+This ensures the customer always pays proportionally for the time each extra seat was active.
 
 ### Seat Features
 
@@ -148,8 +148,8 @@ if (!access.allowed) {
   // Plan does not allow more seats (e.g., at plan limit and overageEnabled is false)
 }
 
-if (data.willBeCharged) {
-  // Adding a seat will incur a prorated charge
+if (access.type === "seats" && access.usage.remainingUnits === 0 && access.usage.overage.enabled) {
+  // Adding a seat above the already-paid high-water mark incurs a prorated charge
 }
 ```
 
@@ -192,7 +192,7 @@ Plan: Enterprise ($499/mo)
 | Event | What Happens |
 |-------|-------------|
 | Period start | Advance charge for all current seats above included |
-| Seats added mid-period | Prorated true-up charged immediately |
+| Seats added mid-period | Prorated true-up billed on the next invoice |
 | Seats removed mid-period | No refund. Reduction applies at next period. |
 | Upgrade | New included seats and overage price apply immediately |
 | Downgrade | At renewal, new values apply |

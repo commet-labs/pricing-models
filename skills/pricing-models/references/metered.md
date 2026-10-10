@@ -80,10 +80,11 @@ const access = await commet.featureAccess.get({
   customerId: "user_123",
 });
 
-// access.consumption.unitsUsed = 8,500 for a metered feature
-// data.included  = 10,000 (free units)
-// data.remaining = 1,500  (before overage kicks in)
-// data.overage   = 0      (overage units so far)
+// For a usage feature on a metered plan, access.consumption carries:
+// unitsUsed      = 8,500  (units recorded this period)
+// includedUnits  = 10,000 (free units)
+// remainingUnits = 1,500  (before overage kicks in; absent when unlimited)
+// overage.units  = 0      (overage units so far)
 ```
 
 ## Idempotency
@@ -129,7 +130,7 @@ Plan: Enterprise ($499/mo)
 | Event | What Happens |
 |-------|-------------|
 | Period end | Overage calculated and invoiced |
-| Mid-period upgrade | Usage carries over, new included amount and overage price apply |
+| Mid-period upgrade | Overage so far is invoiced at the old plan's rate; the period restarts with the new included amount and overage price |
 | Mid-period downgrade | Takes effect at renewal, current period uses current plan |
 | Cancellation | Final overage charged on last invoice |
 | Price increase by founder | Takes effect at renewal (does not hurt customer mid-period) |

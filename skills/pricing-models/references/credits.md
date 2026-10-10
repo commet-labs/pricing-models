@@ -111,16 +111,18 @@ const access = await commet.featureAccess.get({
   customerId: "user_123",
 });
 
-// access.consumption exposes credits consumed and remaining
-// data.included  = 100 (plan credits per period)
-// data.remaining = 20  (credits left)
+// For a usage feature on a credits plan, access.consumption carries:
+// unitsUsed       = 40 (units recorded this period)
+// creditsConsumed = 80 (credits this feature deducted)
+// availableUnits  = 10 (units the remaining shared credit pool still covers)
+// Use usage.check() for planCredits, purchasedCredits, and totalCredits.
 ```
 
 ### List available credit packs
 
 ```typescript
 const { data: packs } = await commet.creditPacks.list();
-// [{ id, name, credits, price, currency }]
+// [{ id, name, credits, price, isActive, ... }]
 ```
 
 ## Plan Configuration Example
@@ -157,10 +159,11 @@ Credit Packs:
 | Renewal | Reset to `includedCredits` | Intact |
 | Upgrade | Reset to new plan's value | Intact |
 | Downgrade | At renewal, reset to new value | Intact |
-| Cancellation | Set to 0 | Preserved |
-| Reactivation | Reset to `includedCredits` | Restored |
-| Pause | Set to 0 | Preserved |
-| Resume | Reset to `includedCredits` | Restored |
+| Cancellation | No cancellation-specific change | Intact |
+| Reactivation | Not reset when already initialized | Intact |
+| Pause | No change | Intact |
+| Resume after period-end pause | Reset to `includedCredits` for the new period | Intact |
+| Resume after immediate pause | No change; the preserved period continues | Intact |
 
 ### Credits Per Unit Changes
 
