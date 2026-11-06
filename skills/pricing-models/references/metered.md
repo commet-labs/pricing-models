@@ -133,5 +133,4 @@ Plan: Enterprise ($499/mo)
 | Mid-period upgrade | Overage so far is invoiced at the old plan's rate; the period restarts with the new included amount and overage price |
 | Mid-period downgrade | Takes effect at renewal, current period uses current plan |
 | Cancellation | Final overage charged on last invoice |
-| Price increase by founder | Takes effect at renewal (does not hurt customer mid-period) |
-| Included amount increase by founder | Immediate (benefits customer) |
+| Plan edit by founder (price, included amount, overage price) | New plan version for new subscribers; existing subscriptions keep theirs until moved (moved now: allowances change at once and the price from the next renewal; moved at renewal: everything at renewal) |

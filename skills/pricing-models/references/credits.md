@@ -123,6 +123,8 @@ const access = await commet.featureAccess.get({
 ```typescript
 const { data: packs } = await commet.creditPacks.list();
 // [{ id, name, credits, price, isActive, ... }]
+// Lists your organization's packs. A subscription can buy only the packs
+// its plan version sells, at that version's price.
 ```
 
 ## Plan Configuration Example
@@ -167,13 +169,8 @@ Credit Packs:
 
 ### Credits Per Unit Changes
 
-When the founder changes `creditsPerUnit` for a feature:
-
-| Change | Effect |
-|--------|--------|
-| Increase (costs more credits) | Immediate for new customers. **At renewal** for existing. |
-| Decrease (costs fewer credits) | **Immediate** for everyone (benefits customer). |
+When the founder changes `creditsPerUnit` or `includedCredits`, Commet publishes a new plan version. New subscribers get the new values. Existing subscriptions keep their version's values, whether the change costs customers more or fewer credits, until the founder moves them: moved now, the change applies at once; moved at renewal, it applies from that renewal. Purchased credits are never affected.
 
 ### Credit Pack Price Changes
 
-Changes apply immediately for new purchases. Previously purchased credits are not affected.
+Credit pack prices belong to each plan version. A changed pack price applies to purchases by subscriptions on the new version; existing subscriptions buy at their version's price until moved. Previously purchased credits are not affected.
