@@ -219,4 +219,4 @@ Plan: Enterprise ($199/mo)
 | Pause | No change |
 | Resume after period-end pause | Reset to `includedBalance` for the new period |
 | Resume after immediate pause | No change; the preserved period continues |
-| Plan edit by founder (`includedBalance`, overage price) | New plan version for new subscribers; existing subscriptions keep theirs until moved. Moved now, the `includedBalance` difference is added or subtracted at once (a decrease never creates new debt); moved at renewal, the reset uses the new value |
+| Plan edit by founder (`includedBalance`, overage price) | New plan version for new subscribers; existing subscriptions keep theirs until moved. Moved now, usage already tracked is deducted first, then the `includedBalance` difference is added or subtracted at once (a decrease never creates new debt); moved at renewal, the balance, usage checks, and access stay as they are until the renewal, whose reset uses the new value |

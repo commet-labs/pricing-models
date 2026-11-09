@@ -169,7 +169,7 @@ Credit Packs:
 
 ### Credits Per Unit Changes
 
-When the founder changes `creditsPerUnit` or `includedCredits`, Commet publishes a new plan version. New subscribers get the new values. Existing subscriptions keep their version's values, whether the change costs customers more or fewer credits, until the founder moves them: moved now, the change applies at once; moved at renewal, it applies from that renewal. Purchased credits are never affected.
+When the founder changes `creditsPerUnit` or `includedCredits`, Commet publishes a new plan version. New subscribers get the new values. Existing subscriptions keep their version's values, whether the change costs customers more or fewer credits, until the founder moves them: moved now, the change applies at once; moved at renewal, nothing in the current period changes and the change applies from that renewal. Purchased credits are never affected.
 
 ### Credit Pack Price Changes
 
