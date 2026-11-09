@@ -196,8 +196,7 @@ Plan: Enterprise ($499/mo)
 | Seats removed mid-period | No refund. Reduction applies at next period. |
 | Upgrade | New included seats and overage price apply immediately |
 | Downgrade | At renewal, new values apply |
-| Price increase (founder) | At renewal (does not hurt customer mid-period) |
-| Included seats increase (founder) | Immediate (benefits customer) |
+| Plan edit by founder (price, included seats, seat price) | New plan version for new subscribers; existing subscriptions keep theirs until moved (moved now: allowances change at once and the price from the next renewal; moved at renewal: everything at renewal) |
 
 ## Common Patterns
 
